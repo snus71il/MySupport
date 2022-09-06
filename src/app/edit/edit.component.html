@@ -1,0 +1,33 @@
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Edit ticket</h2>
+
+  <div class="form-control">
+    <label for="title">Title</label>
+    <br>
+    <a id="title" type="text">{{post.title}}</a>
+  </div>
+
+  <div class="form-control">
+    <label>Content of ticket</label>
+    <quill-editor formControlName="text1"></quill-editor>
+  </div>
+
+  <div class="form-control" *ngIf="techsupport; else noedit">
+    <label>Support resolve</label>
+    <quill-editor formControlName="text2" placeholder="Insert resolve here ..."></quill-editor>
+  </div>
+
+  <ng-template #noedit>
+  <div>
+    <label>Support resolve</label>
+    <quill-editor formControlName="text2" [readOnly]="true"></quill-editor>
+  </div>
+  </ng-template>
+
+  <div class="form-control">
+    <input type="checkbox" id="resolve" formControlName="resolve"> <b>  Resolved</b>
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Save</button>
+  <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+</form>

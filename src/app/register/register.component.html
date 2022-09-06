@@ -1,0 +1,44 @@
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Register new user</h2>
+
+  <div class="form-control"
+       [ngClass]="{invalid: form.get('nickname')?.touched && form.get('nickname')?.invalid}">
+    <label for="nickname">Nickname:</label>
+    <input id="nickname" type="text" formControlName="nickname" placeholder="Nickname min 10 length ...">
+    <div class="validation" *ngIf="form.get('nickname')?.touched && form.get('nickname')?.invalid">
+      <small *ngIf="form.get('nickname')?.errors?.['required']">Input nickname!</small>
+      <small *ngIf="form.get('nickname')?.errors?.['minlength']">Nickname min 10 simbols lenght!</small>
+    </div>
+  </div>
+
+  <div class="form-control"
+       [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}">
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" placeholder="Valid email ...">
+    <div
+      *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="validation">
+      <small *ngIf="form.get('email')?.errors?.['required']">Input email!</small>
+      <small *ngIf="form.get('email')?.errors?.['email']">Incorrect email!</small>
+    </div>
+  </div>
+
+  <div class="form-control"
+       [ngClass]="{invalid: form.get('password')?.touched && form.get('password')?.invalid}">
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password" placeholder="Password min 6 length ...">
+    <div class="validation" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+      <small *ngIf="form.get('password')?.errors?.['required']">Input password!</small>
+      <small *ngIf="form.get('password')?.errors?.['minlength']">Password min 6 simbols lenght!</small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <input type="checkbox" id="techsupport" formControlName="techsupport"> <b>  Support Team</b>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="form.invalid"
+  >Register now</button>
+</form>

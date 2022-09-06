@@ -1,0 +1,21 @@
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Creat new ticket</h2>
+
+  <div class="form-control"
+       [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}">
+    <label for="title">Title</label>
+    <input id="title" type="text" formControlName="title" placeholder="Insert title here ...">
+    <div class="validation"
+      *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+      <small *ngIf="form.get('title')?.errors?.['required']">Insert title, please</small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label>Content of ticket</label>
+    <quill-editor formControlName="text1" placeholder="Insert text here ..."></quill-editor>
+  </div>
+
+   <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Create ticket</button>
+   <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+</form>

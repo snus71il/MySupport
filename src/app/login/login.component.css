@@ -1,0 +1,15 @@
+form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+::-webkit-input-placeholder {
+  color:  lightgrey;
+  font-style: italic;
+  font-size: medium;
+}
+
+small {
+  color: red;
+  font-style: italic;
+}

@@ -1,0 +1,56 @@
+<nav class="navbar">
+  <ul>
+    <li routerLinkActive="active">
+      <a [routerLink]="['/login']">Login existing user</a>
+    </li>
+    <li routerLinkActive="active" *ngIf="noregister">
+      <a [routerLink]="['/register']" >Register new user</a>
+    </li>
+    <li>
+      <a href="#" (click)="logout()">Logout</a>
+    </li>
+    <li routerLinkActive="active">
+      <a [routerLink]="['/', 'mailcom']">Contact Us</a>
+    </li>
+  </ul>
+</nav>
+<button class="btn btn-primary" [routerLink]="['/', 'chart']">Chart</button>
+<button class="btn btn-primary" [routerLink]="['/', 'create']">Create ticket</button>
+<div *ngIf="posts.length; else loadersee">
+  <div class="seach">
+    <input type="text" placeholder="find ticket ..." [(ngModel)]="searchT">
+  </div>
+  <br>
+<table>
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Author</th>
+    <th>Date</th>
+    <th>Title</th>
+    <th>Date resolve</th>
+    <th>Author resolve</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let post of posts | searchPosts: searchT | UserFilter: usernick; let idx = index">
+    <td>{{idx+1}}</td>
+    <td>{{post.author}}</td>
+    <td>{{post.date | date:"short"}}</td>
+    <td>{{post.title}}</td>
+    <td>{{post.dateResolve | date:"short"}}</td>
+    <td>{{post.authorSupport}}</td>
+    <td>
+      <button class="btn btn-link" [routerLink]="['/ticket', post.id]">Edit</button>
+      <hr>
+      <button class="btn btn-link" (click)="delpost(post.id)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+<ng-template #loadersee>
+  <p class="text-center">No data...<p>
+</ng-template>
